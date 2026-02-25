@@ -178,7 +178,7 @@ export default function TestPage() {
             API Key
           </label>
           <input
-            type="password"
+            type="text"
             value={api}
             onChange={(e) => {
               setKey(e.target.value);

@@ -199,7 +199,7 @@ export function PlaceholdersAndVanishInput({
         onKeyDown={handleKeyDown}
         ref={inputRef}
         value={value}
-        type="password"
+        type="text"
         className={cn(
           "w-full sm:min-w-100 text-xs lg:min-w-120 relative  sm:text-sm z-50 border-none  text-black h-full rounded-full focus:outline-none focus:ring-0 pl-4 sm:pl-6 pr-14",
           animating && "text-transparent "
