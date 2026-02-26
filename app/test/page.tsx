@@ -173,12 +173,12 @@ export default function TestPage() {
         </div>
 
         {/* API Key */}
-        <div className="flex flex-col gap-1.5">
+        {/* <div className="flex flex-col gap-1.5">
           <label className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
             API Key
           </label>
           <input
-            type="text"
+            type="password"
             value={api}
             onChange={(e) => {
               setKey(e.target.value);
@@ -187,7 +187,7 @@ export default function TestPage() {
             placeholder="gsk_..."
             className="w-full rounded-md border border-slate-200 dark:border-white/30 bg-white dark:bg-transparent text-slate-900 dark:text-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-400 dark:focus:ring-white/40 transition-shadow"
           />
-        </div>
+        </div> */}
 
         {/* Chat Form */}
         <form onSubmit={handleSend} className="flex flex-col gap-2">
