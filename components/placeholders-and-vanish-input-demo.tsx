@@ -5,16 +5,16 @@ import { redirect } from "next/navigation";
 
 export default function PlaceholdersAndVanishInputBox() {
   const placeholders = [
-    "Enter your Grok API key",
+    "Enter your Groq API key",
     "Run To configure Ai Environment"
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    localStorage.setItem("grok-api-key", e.target.value);
+    localStorage.setItem("groq-api-key", e.target.value);
   };
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    redirect("/test");
+    redirect("/playground");
 
   };
   return (

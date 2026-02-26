@@ -151,27 +151,27 @@ export function PlaceholdersAndVanishInput({
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !animating) {
-      vanishAndSubmit();
+      // vanishAndSubmit();
     }
   };
 
-  const vanishAndSubmit = () => {
-    setAnimating(true);
-    draw();
+  // const vanishAndSubmit = () => {
+  //   setAnimating(true);
+  //   draw();
 
-    const value = inputRef.current?.value || "";
-    if (value && inputRef.current) {
-      const maxX = newDataRef.current.reduce(
-        (prev, current) => (current.x > prev ? current.x : prev),
-        0
-      );
-      animate(maxX);
-    }
-  };
+  //   const value = inputRef.current?.value || "";
+  //   if (value && inputRef.current) {
+  //     const maxX = newDataRef.current.reduce(
+  //       (prev, current) => (current.x > prev ? current.x : prev),
+  //       0
+  //     );
+  //     animate(maxX);
+  //   }
+  // };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    vanishAndSubmit();
+    // vanishAndSubmit();
     onSubmit && onSubmit(e);
   };
   return (

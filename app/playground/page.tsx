@@ -15,14 +15,14 @@ export default function TestPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
-      content: "Hi! I am Grok, How can I assist You",
+      content: "Hi! I am Groq, How can I assist You",
     },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [api, setKey] = useState<string>("");
-  const [grokModel, setGrokModel] = useState<string>("llama-3.3-70b-versatile");
+  const [groqModel, setgroqModel] = useState<string>("llama-3.3-70b-versatile");
   const [System_Prompt, setSystemPrompt] = useState<string>("");
 
   const availableModels = [
@@ -46,7 +46,7 @@ export default function TestPage() {
   }, [messages, isLoading]);
 
   useEffect(() => {
-    setKey(localStorage.getItem("grok-api-key") || "");
+    setKey(localStorage.getItem("groq-api-key") || "");
   }, []);
 
   const handleSend = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -66,7 +66,7 @@ export default function TestPage() {
         body: JSON.stringify({
           message: trimmed,
           apiKey: api,
-          model_name: grokModel,
+          model_name: groqModel,
           system_prompt: System_Prompt,
         }),
       });
@@ -108,7 +108,7 @@ export default function TestPage() {
             </CardTitle>
 
             <p className="text-sm text-slate-600 dark:text-slate-400">
-              A playground to test Grok API keys, system prompts, and model
+              A playground to test groq API keys, system prompts, and model
             </p>
           </CardHeader>
           <CardContent  >
@@ -157,8 +157,8 @@ export default function TestPage() {
             Agent / Model
           </label>
           <select
-            value={grokModel}
-            onChange={(e) => setGrokModel(e.target.value)}
+            value={groqModel}
+            onChange={(e) => setgroqModel(e.target.value)}
             className="w-full rounded-md border border-slate-200 dark:border-white/30 bg-white dark:bg-transparent text-slate-900 dark:text-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-400 dark:focus:ring-white/40 transition-shadow appearance-none cursor-pointer"
           >
             {availableModels.map((m) => (
@@ -168,7 +168,7 @@ export default function TestPage() {
             ))}
           </select>
           <p className="text-xs text-slate-400 dark:text-slate-500">
-            Selected: <span className="font-mono">{grokModel}</span>
+            Selected: <span className="font-mono">{groqModel}</span>
           </p>
         </div>
 
@@ -182,7 +182,7 @@ export default function TestPage() {
             value={api}
             onChange={(e) => {
               setKey(e.target.value);
-              localStorage.setItem("grok-api-key", e.target.value);
+              localStorage.setItem("groq-api-key", e.target.value);
             }}
             placeholder="gsk_..."
             className="w-full rounded-md border border-slate-200 dark:border-white/30 bg-white dark:bg-transparent text-slate-900 dark:text-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-400 dark:focus:ring-white/40 transition-shadow"
