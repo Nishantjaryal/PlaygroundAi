@@ -11,6 +11,11 @@ interface ChatMessage {
   content: string;
 }
 
+interface ModelOption {
+  name: string;
+  service: string;
+}
+
 export default function TestPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
@@ -21,14 +26,24 @@ export default function TestPage() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  // const [api, setKey] = useState<string>("");
-  const [groqModel, setgroqModel] = useState<string>("llama-3.3-70b-versatile");
+  const [serviceModel, setserviceModel] = useState<ModelOption>({name: "llama-3.3-70b-versatile",service:"groq"}); 
   const [System_Prompt, setSystemPrompt] = useState<string>("");
-
+ 
   const availableModels = [
-    { value: "llama-3.3-70b-versatile", label: "LLaMA 3.3 70B Versatile" },
-    { value: "llama-3.1-8b-instant", label: "LLaMA 3.1 8B Instant" },
-    { value: "meta-llama/llama-4-scout-17b-16e-instruct", label: "LLaMA 4 Scout 17B" },
+    // Groq models
+    { value: {name: "llama-3.3-70b-versatile",service:"groq"}, label: "LLaMA 3.3 70B Versatile (Groq)" },
+    { value: {name: "llama-3.1-8b-instant",service:"groq"}, label: "LLaMA 3.1 8B Instant (Groq)" },
+    { value: {name: "llama-4-scout-17b-16e-instruct",service:"groq"}, label: "LLaMA 4 Scout 17B (Groq)" },
+    // Ollama cloud models
+    { value: {name: "gpt-oss:120b",service:"ollama"}, label: "GPT-OSS 120B (Ollama)" },
+    { value: {name: "deepseek-v3.2",service:"ollama"}, label: "DeepSeek V3.2 (Ollama)" },
+    { value: {name: "qwen3-coder-next",service:"ollama"}, label: "Qwen3 Coder Next (Ollama)" },
+    { value: {name: "qwen3.5:27b",service:"ollama"}, label: "Qwen 3.5 27B (Ollama)" },
+    { value: {name: "qwen3.5:122b",service:"ollama"}, label: "Qwen 3.5 122B (Ollama)" },
+    { value: {name: "devstral-small-2:24b",service:"ollama"}, label: "Devstral Small 2 24B (Ollama)" },
+    { value: {name: "gemini-3-flash-preview",service:"ollama"}, label: "Gemini 3 Flash Preview (Ollama)" },
+    { value: {name: "glm-5",service:"ollama"}, label: "GLM-5 (Ollama)" },
+    { value: {name: "kimi-k2.5",service:"ollama"}, label: "Kimi K2.5 (Ollama)" },
   ];
 
   // Auto-scroll to the latest message
@@ -54,13 +69,12 @@ export default function TestPage() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("/api/groq", {
+      const res = await fetch(`/api/${serviceModel.service}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message: trimmed,
-          // apiKey: api,
-          model_name: groqModel,
+          model_name: serviceModel.name,
           system_prompt: System_Prompt,
         }),
       });
@@ -151,37 +165,22 @@ export default function TestPage() {
             Agent / Model
           </label>
           <select
-            value={groqModel}
-            onChange={(e) => setgroqModel(e.target.value)}
+            value={serviceModel.name ? JSON.stringify(serviceModel) : ""}
+            onChange={(e) => setserviceModel({  name: JSON.parse(e.target.value).name, service: JSON.parse(e.target.value).service })}
             className="w-full rounded-md border border-slate-200 dark:border-white/30 bg-white dark:bg-transparent text-slate-900 dark:text-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-400 dark:focus:ring-white/40 transition-shadow appearance-none cursor-pointer"
           >
             {availableModels.map((m) => (
-              <option key={m.value} value={m.value} className="bg-white dark:bg-slate-900">
+              <option key={m.value.name} value={JSON.stringify(m.value)} className="bg-white dark:bg-slate-900">
                 {m.label}
               </option>
             ))}
           </select>
           <p className="text-xs text-slate-400 dark:text-slate-500">
-            Selected: <span className="font-mono">{groqModel}</span>
+            Selected: <span className="font-mono">{serviceModel.name}</span>
           </p>
         </div>
 
-        {/* API Key */}
-        {/* <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-            API Key
-          </label>
-          <input
-            type="password"
-            value={api}
-            onChange={(e) => {
-              setKey(process.env.GROQ_API_KEY);
-            }}
-            placeholder="gsk_..."
-            className="w-full rounded-md border border-slate-200 dark:border-white/30 bg-white dark:bg-transparent text-slate-900 dark:text-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-400 dark:focus:ring-white/40 transition-shadow"
-          />
-        </div> */}
-
+        
         {/* Chat Form */}
         <form onSubmit={handleSend} className="flex flex-col gap-2">
           <Textarea

@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     const groq = getGroqClient(process.env.GROQ_API_KEY || "")
 
     const completion = await groq.chat.completions.create({
-      model: model_name || "llama-3.3-70b-versatile",
+      model: model_name ,
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: message },
