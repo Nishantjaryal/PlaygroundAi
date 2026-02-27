@@ -16,18 +16,24 @@ interface ModelOption {
   service: string;
 }
 
+function Get_First_Name(modelName: string) {
+  const parts = modelName.split("-");
+  return parts.length > 0 ? parts[0] : modelName;
+}
+
 export default function TestPage() {
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    {
-      role: "assistant",
-      content: "Hi! I am Groq, How can I assist You",
-    },
-  ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [serviceModel, setserviceModel] = useState<ModelOption>({name: "llama-3.3-70b-versatile",service:"groq"}); 
   const [System_Prompt, setSystemPrompt] = useState<string>("");
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      role: "assistant",
+      content: `Hi! I am Your Ai Agent, How can I assist You`,
+    },
+  ]);
+  
  
   const availableModels = [
     // Groq models
@@ -54,9 +60,7 @@ export default function TestPage() {
     });
   }, [messages, isLoading]);
 
-  // useEffect(() => {
-  //   setKey(process.env.GROQ_API_KEY || "");
-  // }, []);
+  
 
   const handleSend = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -111,12 +115,12 @@ export default function TestPage() {
           <CardHeader>
             <CardTitle className="text-xl">
               <h1 className=" flex gap-2 text-3xl font-semibold mb-1 tracking-tight">
-                Groq Test Environment <Bot className="w-8 h-8" />
+                AI Test Environment <Bot className="w-8 h-8" />
               </h1>{" "}
             </CardTitle>
 
             <p className="text-sm text-slate-600 dark:text-slate-400">
-              A playground to test groq API keys, system prompts, and model
+              A playground to test AI system prompts, and model
             </p>
           </CardHeader>
           <CardContent  >

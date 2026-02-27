@@ -90,15 +90,15 @@ export default function Home() {
       <BackgroundBoxes>
         <div className="relative z-10  flex flex-col items-center gap-2 mb-6 px-4 text-center text-white">
           <Image
-            src="/groqPlay.png"
-            alt="Groq Playground"
+            src="/playgroundAI.png"
+            alt="Ai Playground"
             width={250}
             height={70}
             className="drop-shadow-lg"
             priority
           />
           <p className="text-xs font-mono tracking-wide text-neutral-200">
-            Test Groq User parameters and System prompts
+            Test Groq and Ollama Models on User parameters and System prompts
           </p>
         </div>
 
@@ -195,7 +195,7 @@ export default function Home() {
             </form>
 
             <p className="text-center text-xs text-neutral-200">
-              This is a demo flow. On success you will be redirected to the <Link  href="/playground" className="underline underline-offset-4">playground</Link>.
+              This is a demo flow. On success you will be redirected to the <Link  href="/playground" className="underline underline-offset-4 text-white">playground</Link>.
             </p>
           </CardContent>
         </Card>
