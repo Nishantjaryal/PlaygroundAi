@@ -21,19 +21,13 @@ export default function TestPage() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [api, setKey] = useState<string>("");
+  // const [api, setKey] = useState<string>("");
   const [groqModel, setgroqModel] = useState<string>("llama-3.3-70b-versatile");
   const [System_Prompt, setSystemPrompt] = useState<string>("");
 
   const availableModels = [
     { value: "llama-3.3-70b-versatile", label: "LLaMA 3.3 70B Versatile" },
     { value: "llama-3.1-8b-instant", label: "LLaMA 3.1 8B Instant" },
-    { value: "llama-3.2-1b-preview", label: "LLaMA 3.2 1B Preview" },
-    { value: "llama-3.2-3b-preview", label: "LLaMA 3.2 3B Preview" },
-    { value: "mixtral-8x7b-32768", label: "Mixtral 8x7B 32K" },
-    { value: "gemma2-9b-it", label: "Gemma 2 9B IT" },
-    { value: "deepseek-r1-distill-llama-70b", label: "DeepSeek R1 Distill 70B" },
-    { value: "qwen-qwq-32b", label: "Qwen QwQ 32B" },
     { value: "meta-llama/llama-4-scout-17b-16e-instruct", label: "LLaMA 4 Scout 17B" },
   ];
 
@@ -45,9 +39,9 @@ export default function TestPage() {
     });
   }, [messages, isLoading]);
 
-  useEffect(() => {
-    setKey(localStorage.getItem("groq-api-key") || "");
-  }, []);
+  // useEffect(() => {
+  //   setKey(process.env.GROQ_API_KEY || "");
+  // }, []);
 
   const handleSend = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,12 +54,12 @@ export default function TestPage() {
     setIsLoading(true);
 
     try {
-      const res = await fetch("/api/chat", {
+      const res = await fetch("/api/groq", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message: trimmed,
-          apiKey: api,
+          // apiKey: api,
           model_name: groqModel,
           system_prompt: System_Prompt,
         }),
@@ -181,8 +175,7 @@ export default function TestPage() {
             type="password"
             value={api}
             onChange={(e) => {
-              setKey(e.target.value);
-              localStorage.setItem("groq-api-key", e.target.value);
+              setKey(process.env.GROQ_API_KEY);
             }}
             placeholder="gsk_..."
             className="w-full rounded-md border border-slate-200 dark:border-white/30 bg-white dark:bg-transparent text-slate-900 dark:text-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-400 dark:focus:ring-white/40 transition-shadow"

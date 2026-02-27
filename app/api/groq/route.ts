@@ -10,7 +10,7 @@ const getGroqClient = (apiKey:string) => {
 
 export async function POST(req: NextRequest) {
   try {
-    const { message, apiKey, model_name, system_prompt } = await req.json()
+    const { message, model_name, system_prompt } = await req.json()
 
     const SYSTEM_PROMPT = system_prompt || "You are a very helpful, kind and intelligent ai agent, help users with their queries"; // Use the provided system prompt or default to a generic one
 
@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const groq = getGroqClient(apiKey)
+    const groq = getGroqClient(process.env.GROQ_API_KEY || "")
 
     const completion = await groq.chat.completions.create({
       model: model_name || "llama-3.3-70b-versatile",

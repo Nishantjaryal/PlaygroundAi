@@ -3,6 +3,9 @@
 import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
 import { redirect } from "next/navigation";
 
+
+// unused component to test the vanish input and placeholders, not used in the app currently
+
 export default function PlaceholdersAndVanishInputBox() {
   const placeholders = [
     "Enter your Groq API key",
@@ -10,7 +13,7 @@ export default function PlaceholdersAndVanishInputBox() {
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    localStorage.setItem("groq-api-key", e.target.value);
+    
   };
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

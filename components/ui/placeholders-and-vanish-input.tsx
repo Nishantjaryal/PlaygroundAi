@@ -4,6 +4,8 @@ import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
+// unused component to test the vanish input and placeholders, not used in the app currently
+
 export function PlaceholdersAndVanishInput({
   placeholders,
   onChange,
