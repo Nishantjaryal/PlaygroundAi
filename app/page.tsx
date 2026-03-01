@@ -22,7 +22,7 @@ export default function Home() {
             Test Groq and Ollama Models on User parameters and System prompts
           </p>
         </div>
-        <Auth/>
+        <Auth/> 
       </BackgroundBoxes>
     </main>
   );
