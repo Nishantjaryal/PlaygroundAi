@@ -43,7 +43,9 @@ export default function TestPage() {
     // Ollama cloud models
     { value: {name: "gpt-oss:120b",service:"ollama"}, label: "GPT-OSS 120B (Ollama)" },
     { value: {name: "deepseek-v3.2",service:"ollama"}, label: "DeepSeek V3.2 (Ollama)" },
-  
+    { value: {name: "qwen3-coder-next",service:"ollama"}, label: "Qwen3 Coder Next (Ollama)" },
+    { value: {name: "qwen3.5:27b",service:"ollama"}, label: "Qwen 3.5 27B (Ollama)" },
+    { value: {name: "qwen3.5:122b",service:"ollama"}, label: "Qwen 3.5 122B (Ollama)" },
     { value: {name: "devstral-small-2:24b",service:"ollama"}, label: "Devstral Small 2 24B (Ollama)" },
     { value: {name: "gemini-3-flash-preview",service:"ollama"}, label: "Gemini 3 Flash Preview (Ollama)" },
     { value: {name: "glm-5",service:"ollama"}, label: "GLM-5 (Ollama)" },

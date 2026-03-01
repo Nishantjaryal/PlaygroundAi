@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Models Playground ",
-  description: "Test AI Models with User Parameters and System prompts",
+  title: "Groq API Playground ",
+  description: "Test Groq API Keys and System prompts",
 };
 
 export default function RootLayout({
