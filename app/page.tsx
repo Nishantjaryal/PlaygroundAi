@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  useMemo,
-  useState,
-  type ChangeEvent,
-  type FormEvent,
-} from "react";
+import { useMemo, useState, type ChangeEvent, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -36,7 +31,7 @@ export default function Home() {
 
   const title = useMemo(
     () => (mode === "signin" ? "Sign in to continue" : "Create your account"),
-    [mode]
+    [mode],
   );
 
   const subtitle = useMemo(
@@ -44,11 +39,11 @@ export default function Home() {
       mode === "signin"
         ? "Use the email you registered with to access the playground."
         : "Sign up to start testing Groq prompts in the playground.",
-    [mode]
+    [mode],
   );
 
-  const handleChange = (key: keyof typeof form) =>
-    (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange =
+    (key: keyof typeof form) => (event: ChangeEvent<HTMLInputElement>) => {
       setForm((prev) => ({ ...prev, [key]: event.target.value }));
       setError("");
     };
@@ -69,13 +64,9 @@ export default function Home() {
     return "";
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const validationError = validate();
-    if (validationError) {
-      setError(validationError);
-      return;
-    }
+
+  const handleSubmit = async () => {
+   
 
     setIsSubmitting(true);
     setError("");
@@ -102,102 +93,15 @@ export default function Home() {
           </p>
         </div>
 
-        <Card className="relative z-10 w-full max-w-md border-white/10 bg-white/10 px-1 backdrop-blur-sm shadow-xl text-white">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div className="flex gap-2 rounded-full border border-white/10 bg-white/10 p-1 text-xs font-medium uppercase tracking-tight">
-                <Button
-                  type="button"
-                  size="sm"
-                  variant={mode === "signin" ? "default" : "ghost"}
-                  className="rounded-full px-3"
-                  onClick={() => setMode("signin")}
-                  disabled={isSubmitting}
-                >
-                  Sign in
-                </Button>
-                <Button
-                  type="button"
-                  size="sm"
-                  variant={mode === "signup" ? "default" : "ghost"}
-                  className="rounded-full px-3"
-                  onClick={() => setMode("signup")}
-                  disabled={isSubmitting}
-                >
-                  Sign up
-                </Button>
-              </div>
-              
-            </div>
-            <div className="space-y-1">
-              <CardTitle className="text-xl text-white">{title}</CardTitle>
-              <CardDescription className="text-neutral-200">
-                {subtitle}
-              </CardDescription>
-            </div>
-          </CardHeader>
+        <Card className="relative z-10 w-full flex justify-center items-center max-w-md border-white/10 bg-white/10 px-1 backdrop-blur-sm shadow-xl text-white">
+          <Button className="w-[80%]" disabled={isSubmitting} onClick={()=>handleSubmit()}>
+            {isSubmitting ? "Creating... " : "Launch Playground"}
+          </Button>
 
-          <CardContent className="space-y-5">
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-white">Email</label>
-                <Input
-                  type="email"
-                  autoComplete="email"
-                  placeholder="you@example.com"
-                  value={form.email}
-                  onChange={handleChange("email")}
-                  className="bg-white/10 text-white placeholder:text-neutral-300"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-white">Password</label>
-                <Input
-                  type="password"
-                  autoComplete={mode === "signin" ? "current-password" : "new-password"}
-                  placeholder="••••••••"
-                  value={form.password}
-                  onChange={handleChange("password")}
-                  className="bg-white/10 text-white placeholder:text-neutral-300"
-                />
-              </div>
-
-              {mode === "signup" && (
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-white">Confirm password</label>
-                  <Input
-                    type="password"
-                    autoComplete="new-password"
-                    placeholder="••••••••"
-                    value={form.confirm}
-                    onChange={handleChange("confirm")}
-                    className="bg-white/10 text-white placeholder:text-neutral-300"
-                  />
-                </div>
-              )}
-
-              {error && (
-                <p className="rounded-md border border-red-200/60 bg-red-50/70 px-3 py-2 text-sm font-medium text-red-900">
-                  {error}
-                </p>
-              )}
-
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting
-                  ? mode === "signin"
-                    ? "Signing in..."
-                    : "Creating account..."
-                  : mode === "signin"
-                    ? "Sign in"
-                    : "Sign up"}
-              </Button>
-            </form>
-
-            <p className="text-center text-xs text-neutral-200">
-              This is a demo flow. On success you will be redirected to the <Link  href="/playground" className="underline underline-offset-4 text-white">playground</Link>.
-            </p>
-          </CardContent>
+          {/* <p className="text-center text-xs text-neutral-200">
+Built a testing framework to evaluate responses from Groq and Ollama models against custom user parameters and system prompts.
+Analyzed model behavior, prompt sensitivity, and output quality to compare performance across different configurations.
+Designed to support prompt engineering experiments and optimize LLM response reliability.            </p> */}
         </Card>
       </BackgroundBoxes>
     </main>
