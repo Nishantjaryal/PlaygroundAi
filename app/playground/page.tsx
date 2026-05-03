@@ -1,5 +1,6 @@
 "use client";
-import { auth } from "@/auth";
+
+
 import { redirect } from "next/navigation";
 import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -20,13 +21,34 @@ interface ModelOption {
   sys_temperature: number;
 }
 
+interface Session {
+  user: {
+    name: string;
+    email: string;
+    image: string;
+  }}
+
+export default  function TestPage() {
+
+  
+  useEffect(() => {
+  const fetchUser = async () => {
+    const info: Session = await fetch("/api/user", {
+      method: "GET",
+    }).then((res) => res.json());
 
 
-export default async function TestPage() {
-  const session = await auth();
-  if (!session?.user) {
-    redirect("/login");
-  }
+    console.log("User session info:", info); // Debugging log
+
+    if (!info.user) {
+
+      redirect("/");
+    }
+
+  };
+
+  fetchUser();
+}, []);
 
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
