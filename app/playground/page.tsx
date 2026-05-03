@@ -1,5 +1,6 @@
 "use client";
-
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 import { useRef, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,21 +12,28 @@ interface ChatMessage {
   content: string;
 }
 
+
+
 interface ModelOption {
   name: string;
   service: string;
+  sys_temperature: number;
 }
 
-function Get_First_Name(modelName: string) {
-  const parts = modelName.split("-");
-  return parts.length > 0 ? parts[0] : modelName;
-}
 
-export default function TestPage() {
+
+export default async function TestPage() {
+  const session = await auth();
+  if (!session?.user) {
+    redirect("/login");
+  }
+
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [temp, setTemp] = useState(0.7);
+
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [serviceModel, setserviceModel] = useState<ModelOption>({name: "llama-3.3-70b-versatile",service:"groq"}); 
+  const [serviceModel, setserviceModel] = useState<ModelOption>({name: "llama-3.3-70b-versatile",service:"groq", sys_temperature: temp}); 
   const [System_Prompt, setSystemPrompt] = useState<string>("");
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
@@ -170,7 +178,7 @@ export default function TestPage() {
           </label>
           <select
             value={serviceModel.name ? JSON.stringify(serviceModel) : ""}
-            onChange={(e) => setserviceModel({  name: JSON.parse(e.target.value).name, service: JSON.parse(e.target.value).service })}
+            onChange={(e) => setserviceModel({  name: JSON.parse(e.target.value).name, service: JSON.parse(e.target.value).service, sys_temperature: JSON.parse(e.target.value).sys_temperature })}
             className="w-full rounded-md border border-slate-200 dark:border-white/30 bg-white dark:bg-transparent text-slate-900 dark:text-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-400 dark:focus:ring-white/40 transition-shadow appearance-none cursor-pointer"
           >
             {availableModels.map((m) => (
@@ -199,6 +207,12 @@ export default function TestPage() {
             placeholder="System prompt"
             className="dark:border-white/30 min-h-24 dark:bg-transparent dark:text-white"
           />
+
+           <label className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+            Randomness
+          </label>
+
+          <input className="py-2 " type="range" id="volume" name="volume" min="0" max="2" step="0.1" value={temp} onChange={(e) => setTemp(parseFloat(e.target.value))}  />
           <div className="flex justify-end">
             <Button type="submit" disabled={isLoading}>
               {isLoading ? "Sending..." : "Send"}
