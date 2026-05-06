@@ -72,14 +72,14 @@ export default  function TestPage() {
     { value: {name: "llama-4-scout-17b-16e-instruct",service:"groq"}, label: "LLaMA 4 Scout 17B (Groq)" },
     // Ollama cloud models
     { value: {name: "gpt-oss:120b",service:"ollama"}, label: "GPT-OSS 120B (Ollama)" },
-    { value: {name: "deepseek-v3.2",service:"ollama"}, label: "DeepSeek V3.2 (Ollama)" },
-    { value: {name: "qwen3-coder-next",service:"ollama"}, label: "Qwen3 Coder Next (Ollama)" },
-    { value: {name: "qwen3.5:27b",service:"ollama"}, label: "Qwen 3.5 27B (Ollama)" },
-    { value: {name: "qwen3.5:122b",service:"ollama"}, label: "Qwen 3.5 122B (Ollama)" },
     { value: {name: "devstral-small-2:24b",service:"ollama"}, label: "Devstral Small 2 24B (Ollama)" },
-    { value: {name: "gemini-3-flash-preview",service:"ollama"}, label: "Gemini 3 Flash Preview (Ollama)" },
-    { value: {name: "glm-5",service:"ollama"}, label: "GLM-5 (Ollama)" },
-    { value: {name: "kimi-k2.5",service:"ollama"}, label: "Kimi K2.5 (Ollama)" },
+    { value: {name: "gpt-oss:20b",service:"ollama"}, label: "GPT-OSS 20B (Ollama)" },
+    { value: {name: "qwen3-vl:8b",service:"ollama"}, label: "Qwen3-VL 8B (Ollama)" },
+    { value: {name: "qwen3-vl:30b",service:"ollama"}, label: "Qwen3-VL 30B (Ollama)" },
+    { value: {name: "qwen3-coder:30b",service:"ollama"}, label: "Qwen3-Coder 30B (Ollama)" },
+    { value: {name: "qwen3-coder:480b",service:"ollama"}, label: "Qwen3-Coder 480B (Ollama)" },
+    { value: {name: "gemma3:12b",service:"ollama"}, label: "Gemma 3 12B (Ollama)" },
+    { value: {name: "gemma3:27b",service:"ollama"}, label: "Gemma 3 27B (Ollama)" },
   ];
 
   // Auto-scroll to the latest message
