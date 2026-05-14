@@ -15,10 +15,11 @@ export async function POST(req: NextRequest) {
             sys_temperature = 0.7, // default
 
       } = await req.json();
-
+      const Generic_System_Prompt = "You are a very helpful, kind and intelligent ai agent, help users with their queries";
+      const Important_System_Prompt = ". Most Important: Only respond with the answer in plain text format. if required For writing code use tag";
     const SYSTEM_PROMPT =
-      system_prompt ||
-      "You are a very helpful, kind and intelligent ai agent, help users with their queries"; // Use the provided system prompt or default to a generic one
+      (system_prompt  ||
+      Generic_System_Prompt) + Important_System_Prompt; // Use the provided system prompt or default to a generic one
 
     if (!message || typeof message !== "string") {
       return NextResponse.json(

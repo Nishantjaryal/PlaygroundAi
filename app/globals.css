@@ -124,3 +124,26 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+/* Width of the vertical scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track background */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 5px;
+}
+
+/* Draggable thumb */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 5px;
+}
+
+/* Thumb hover state */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}

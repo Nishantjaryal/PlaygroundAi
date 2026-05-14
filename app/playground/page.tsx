@@ -74,9 +74,6 @@ export default  function TestPage() {
     { value: {name: "gpt-oss:120b",service:"ollama"}, label: "GPT-OSS 120B (Ollama)" },
     { value: {name: "devstral-small-2:24b",service:"ollama"}, label: "Devstral Small 2 24B (Ollama)" },
     { value: {name: "gpt-oss:20b",service:"ollama"}, label: "GPT-OSS 20B (Ollama)" },
-    { value: {name: "qwen3-vl:8b",service:"ollama"}, label: "Qwen3-VL 8B (Ollama)" },
-    { value: {name: "qwen3-vl:30b",service:"ollama"}, label: "Qwen3-VL 30B (Ollama)" },
-    { value: {name: "qwen3-coder:30b",service:"ollama"}, label: "Qwen3-Coder 30B (Ollama)" },
     { value: {name: "qwen3-coder:480b",service:"ollama"}, label: "Qwen3-Coder 480B (Ollama)" },
     { value: {name: "gemma3:12b",service:"ollama"}, label: "Gemma 3 12B (Ollama)" },
     { value: {name: "gemma3:27b",service:"ollama"}, label: "Gemma 3 27B (Ollama)" },
@@ -139,26 +136,26 @@ export default  function TestPage() {
   };
 
   return (
-    <div className="min-h-screen flex gap-4 bg-white text-slate-900 dark:bg-black dark:text-white p-4">
-      <div className="flex flex-col justify-start items-start gap-4 w-full">
-        <Card className="w-full h-full dark:bg-black backdrop-blur ">
+    <div className="min-h-screen flex max-sm:flex-col  gap-4 bg-white text-slate-900 dark:bg-black dark:text-white p-4 max-sm:p-2 ">
+      <div className="flex flex-col min-w-75 justify-start  max-sm:h-[50vh] max-h-[95vh] items-start gap-4 w-full">
+        <Card className="w-full  h-full  overflow-y-auto dark:bg-black backdrop-blur ">
           <CardHeader>
             <CardTitle className="text-xl">
-              <h1 className=" flex gap-2 text-3xl font-semibold mb-1 tracking-tight">
+              <h1 className=" flex gap-2 text-3xl max-sm:text-2xl font-semibold mb-1 tracking-tight">
                 AI Test Environment <Bot className="w-8 h-8" />
               </h1>{" "}
             </CardTitle>
 
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+            <p className=" max-sm:hidden text-sm text-slate-600 dark:text-slate-400">
               A playground to test AI system prompts, and model
             </p>
           </CardHeader>
           <CardContent  >
             <div
               ref={scrollRef}
-              className="h-full overflow-y-auto rounded-md p-4 dark:bg-black-600"
+              className="h-full overflow-y-auto rounded-md p-4 max-sm:p-2 dark:bg-black-600"
             >
-              <div className="space-y-4">
+              <div className="space-y-4 max-sm:space-y-2">
                 {messages.map((m, idx) => (
                   <div
                     key={idx}
@@ -195,7 +192,7 @@ export default  function TestPage() {
       <div className="min-w-72 flex flex-col gap-3">
         {/* Agent / Model Selector */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+          <label className=" max-sm:hidden text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
             Agent / Model
           </label>
           <select
