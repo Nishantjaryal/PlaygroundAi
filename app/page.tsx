@@ -26,7 +26,7 @@ export default async function Home() {
           </p>
         </div>
 
-        <Card className="relative z-10 w-full flex justify-center items-center max-w-md border-white/10 bg-white/10 px-1 backdrop-blur-sm shadow-xl text-white">
+        <Card className="relative z-10 w-[90%] flex justify-center items-center max-w-md border-white/10 bg-white/10 px-1 backdrop-blur-sm shadow-xl text-white">
           <SignIn  session={session} />
         </Card>
       </BackgroundBoxes>
